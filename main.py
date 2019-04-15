@@ -63,6 +63,3 @@ while t < 10:
     #     l[i], l[i+1] = collide_if_close(l[i], l[i+1])
 
 
-
-
-
