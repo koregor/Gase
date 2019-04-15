@@ -1,37 +1,68 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import random
-N = 1000
+import time
+N = 10
+dt = 0.01
+t = 0
+wall_1 = 0
+wall_2 = 10
 
 
 class Particle:
     def __init__(self):
-        self.x = random.randrange(1, 10)
-        self.vx = random.randrange(1, 10)
+        self.x = random.uniform(0, 10)
+        self.vx = random.uniform(-100, 100)
 
     def show(self):
-        print(self.x)
-        print(self.vx, "\n")
+        print("x = ", self.x)
+        print("vx = ", self.vx, "\n")
 
+    def calc(self):
+        self.x += self.vx * dt
+        if abs(self.x - wall_1) < 1 or abs(self.x - wall_2) < 1:
+            self.vx = -self.vx
+
+    def __lt__(self, other):
+        if self.x < other.x:
+            return True
+        return False
+
+
+def collide_if_close(p1, p2):
+    if abs(p1.x - p2.x) < 0.1:
+        tmp = p1.vx
+        p1.vx = p2.vx
+        p2.vx = tmp
+    return p1, p2
 
 l = []
+xValues = []
+yValues = [0]*N
 for i in range(N):
-    l.append(Particle())
-a = np.array(l)
+    p = Particle()
+    l.append(p)
+    xValues.append(p.x)
+
+plt.xlim((wall_1 - 5, wall_2 + 5))
+
+
+while t < 10:
+    for i in range(len(l) - 1):
+        l[i].calc()
+        xValues[i] = l[i].x
+
+    plt.cla()
+    plt.scatter(xValues, yValues, s=1)
+    plt.draw()
+    plt.pause(0.019)
+    t += dt
+
+    # l = np.sort(l)
+    # for i in range(len(l) - 1):
+    #     l[i], l[i+1] = collide_if_close(l[i], l[i+1])
 
 
 
-# dt = 0.1
-# t = 0
-# wall_1 = 0
-# wall_2 = 10
-#
-# a = np.zeros((100, 1), Particle)
-# print (a)
-#
-# while t < 10:
-#     p1.x += dt*p1.vx
-#     if abs(p1.x - wall_1) < 0.1 or abs(p1.x - wall_2) < 0.1:
-#         p1.vx = -p1.vx
-#         print("boom")
-#     t += dt
-#     print(p1.x)
+
+
