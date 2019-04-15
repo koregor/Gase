@@ -59,29 +59,3 @@ while t < 100:
 
 
 
-
-
-
-# p1 = Particle()
-# p2 = Particle()
-#
-# p1.show()
-# p2.show()
-# (p1, p2) = collide(p1, p2)
-# p1.show()
-# p2.show()
-# dt = 0.1
-# t = 0
-# wall_1 = 0
-# wall_2 = 10
-#
-# a = np.zeros((100, 1), Particle)
-# print (a)
-#
-# while t < 10:
-#     p1.x += dt*p1.vx
-#     if abs(p1.x - wall_1) < 0.1 or abs(p1.x - wall_2) < 0.1:
-#         p1.vx = -p1.vx
-#         print("boom")
-#     t += dt
-#     print(p1.x)
