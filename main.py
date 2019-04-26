@@ -7,12 +7,15 @@ dt = 0.01
 t = 0
 wall_1 = 0
 wall_2 = 10
+wall_3 = 1
+wall_4 = -1
 
 
 class Particle:
     def __init__(self):
         self.x = random.uniform(0, 10)
         self.vx = random.uniform(-100, 100)
+
 
     def show(self):
         print("x = ", self.x)
@@ -44,7 +47,7 @@ for i in range(N):
     l.append(p)
     xValues.append(p.x)
 
-plt.xlim((wall_1 - 5, wall_2 + 5))
+plt.xlim((wall_1, wall_2))
 
 
 while t < 10:
@@ -54,6 +57,7 @@ while t < 10:
 
     plt.cla()
     plt.scatter(xValues, yValues, s=1)
+    plt.axis([-10,10,-1,1])
     plt.draw()
     plt.pause(0.019)
     t += dt
